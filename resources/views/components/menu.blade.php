@@ -20,6 +20,6 @@
         @endforeach
     </ul>
     <div class="flex items-center gap-5">
-        <x-untitledui-settings-toggle-line class="w-4 h-4 text-white rotate-90" />
+        <x-lucide-settings-2 class="w-6 h-6 text-white rotate-90" />
     </div>
 </nav>

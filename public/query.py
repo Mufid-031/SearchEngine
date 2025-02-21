@@ -21,10 +21,10 @@ list_doc = {}
 for q in query:
 	try :
 		for doc in indexFile[q]:
-			if doc['url'] in list_doc :
-				list_doc[doc['url']]['score'] += doc['score']
+			if doc['desc'] in list_doc :
+				list_doc[doc['desc']]['score'] += doc['score']
 			else :
-				list_doc[doc['url']] = doc
+				list_doc[doc['desc']] = doc
 	except :
 		continue
 

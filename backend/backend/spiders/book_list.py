@@ -1,7 +1,7 @@
 import scrapy
 import json
 
-filename = "book.json"  # To save store data
+filename = "book.txt"  # To save store data
 
 class IntroSpider(scrapy.Spider):
     name = "book_spider"     # Name of the scraper
