@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout class="overflow-hidden">
     <div id="container-index-page"
         class="grid grid-cols-3 w-full h-screen bg-[url('/public/background.svg')] bg-cover bg-no-repeat relative overflow-hidden">
         <div class="flex flex-col justify-between h-full py-8 px-5">
@@ -44,7 +44,7 @@
             </div>
             <div class="w-full">
                 <div class="flex justify-end items-end">
-                    <span class="flex gap-1 items-center text-white text-sm mr-10 cursor-pointer">
+                    <span id="customize" class="flex gap-1 items-center text-white text-sm mr-10 cursor-pointer">
                         <x-lucide-settings-2 class="w-3 h-3 text-white" />
                         Customize
                     </span>

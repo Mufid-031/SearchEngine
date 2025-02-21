@@ -1,3 +1,5 @@
+@props(['class' => ''])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -5,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Larawik</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,7 +20,7 @@
     @vite('resources/js/gsap.js')
 </head>
 
-<body class="bg-[#1a1a1a]">
+<body class="bg-[#1a1a1a] {{ $class }}">
 
     {{ $slot }}
 
