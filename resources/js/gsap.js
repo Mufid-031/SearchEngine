@@ -199,13 +199,33 @@ gsap.fromTo(
 window.addEventListener("scroll", (e) => {
     const navbar = document.querySelector("#navbar");
     if (Math.round(window.scrollY) > 20) {
-        navbar.classList.add("fixed", "top-0", "left-0", "right-0", "z-50", "bg-black/30", "]bg-blur-xl", "transition-all", "duration-300");
+        navbar.classList.add(
+            "fixed",
+            "top-0",
+            "left-0",
+            "right-0",
+            "z-50",
+            "bg-black/30",
+            "]bg-blur-xl",
+            "transition-all",
+            "duration-300"
+        );
         navbar.classList.remove("mt-5");
     } else {
-        navbar.classList.remove("fixed", "top-0", "left-0", "right-0", "z-50", "bg-black/30", "]bg-blur-xl", "transition-all", "duration-300");
+        navbar.classList.remove(
+            "fixed",
+            "top-0",
+            "left-0",
+            "right-0",
+            "z-50",
+            "bg-black/30",
+            "]bg-blur-xl",
+            "transition-all",
+            "duration-300"
+        );
         navbar.classList.add("mt-5");
     }
-})
+});
 
 gsap.fromTo(
     "#option",
@@ -258,4 +278,64 @@ cards.forEach((card, index) => {
             }
         );
     }
+});
+
+const covers = document.querySelectorAll("#cover");
+
+covers.forEach((cover, index) => {
+    gsap.fromTo(
+        cover,
+        {
+            scale: 0,
+            opacity: 0,
+        },
+        {
+            scale: 1,
+            opacity: 1,
+            duration: 1.5,
+            ease: "power4.out",
+            stagger: 0.5,
+            delay: 2,
+        }
+    );
+});
+
+const titles = document.querySelectorAll("#title");
+
+titles.forEach((title, index) => {
+    gsap.fromTo(
+        title,
+        {
+            y: 30,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: "power4.out",
+            stagger: 0.5,
+            delay: 2,
+        }
+    );
+});
+
+const prices = document.querySelectorAll("#price");
+
+prices.forEach((price, index) => {
+    gsap.fromTo(
+        price,
+        {
+            y: 30,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: "power4.out",
+            stagger: 0.5,
+            delay: 2,
+        }
+    );
 });

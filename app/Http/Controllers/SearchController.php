@@ -22,7 +22,7 @@ class SearchController extends Controller
         // }
 
         $data = cache()->remember("search_{$query}", 60, function () use ($query) {
-            $output = shell_exec("python query.py indexwiki 10 \"{$query}\"");
+            $output = shell_exec("python query.py indexdb 10 \"{$query}\"");
             $list_data = array_filter(explode("\n", $output));
 
             return array_map(function($data) {

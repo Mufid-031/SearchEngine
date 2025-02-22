@@ -3,7 +3,7 @@
 <nav id="navbar" class="flex justify-between items-center p-10 w-full h-14 mt-5">
     <div id="title" class="flex items-center gap-5 pr-12">
         <a class="text-2xl font-bold text-red-500" href="/">
-            Larawik
+            Larabook
         </a>
     </div>
     <div class="w-full flex justify-center mx-10 relative">
