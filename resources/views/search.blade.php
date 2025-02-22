@@ -1,5 +1,3 @@
-{{-- {{ dd($data) }} --}}
-
 <x-layout>
     <div class="fixed inset-0 z-[-1] overflow-hidden">
         <img id="container-index-page" class="w-full h-full object-cover" src="{{ asset('/background.svg') }}"
@@ -22,7 +20,3 @@
         </div>
     </main>
 </x-layout>
-
-{{-- <div class="w-2/3 h-full flex flex-col gap-5"> --}}
-{{-- <x-menu /> --}}
-{{-- </div> --}}

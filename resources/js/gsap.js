@@ -103,10 +103,8 @@ searchInput.addEventListener("focus", (e) => {
     });
 
     e.target.addEventListener("keydown", (e) => {
-        if (searchInput.value !== "" && e.key === "Enter") {
-            fetch(`http://127.0.0.1:8000/search?query=${searchInput.value}`);
+        if (searchInput.value.trim() !== "" && e.key === "Enter") {
             window.location.href = `/search?query=${searchInput.value}`;
-            getData();
         }
     });
 });

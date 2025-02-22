@@ -12,15 +12,6 @@ class SearchController extends Controller
     {
         $query = $request->query('query');
 
-        // $output = shell_exec("python query.py indexdb 10 \"{$query}\"");
-
-        // $process = new Process(["$pythonPath $path indexdb 10 \"{$query}\""]);
-        // $process->run();
-
-        // if (!$process->isSuccessful()) {
-        //     throw new ProcessFailedException($process);
-        // }
-
         $data = cache()->remember("search_{$query}", 60, function () use ($query) {
             $output = shell_exec("python query.py indexdb 10 \"{$query}\"");
             $list_data = array_filter(explode("\n", $output));
