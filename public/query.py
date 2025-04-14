@@ -1,45 +1,69 @@
-#!/usr/bin/python3
-
-import re
 import sys
 import json
-import pickle
+import pandas as pd
+from PyPDF2 import PdfReader
+import os
 
-#Argumen check
-if len(sys.argv) != 4 :
-	print ("\n\nPenggunaan\n\tquery.py [index.txt] [n] [query]..\n")
-	sys.exit(1)
+def read_pdf(file_path):
+    reader = PdfReader(file_path)
+    text = ''
+    for page in reader.pages:
+        if page.extract_text():
+            text += page.extract_text() + '\n'
+    return text.strip().split('\n')
 
-query = sys.argv[3].split(" ")
-n = int(sys.argv[2])
+def read_csv(file_path):
+    try:
+        df = pd.read_csv(file_path)
+        return df.astype(str).apply(lambda row: ' '.join(row), axis=1).tolist()
+    except Exception as e:
+        print(f"Failed to read CSV: {e}")
+        return []
 
-with open(sys.argv[1], 'rb') as indexdb:
-	indexFile = pickle.load(indexdb)
+def read_json(file_path):
+    with open(file_path, 'r', encoding='utf-8') as f:
+        try:
+            json_data = json.load(f)
+            if isinstance(json_data, list):
+                return [
+                    ' '.join(str(value) for value in item.values() if value)
+                    for item in json_data
+                ]
+        except Exception as e:
+            print(f"Failed to read JSON: {e}")
+    return []
 
-#query
-list_doc = {}
-for q in query:
-	try :
-		for doc in indexFile[q]:
-			if doc['url'] in list_doc :
-				list_doc[doc['url']]['score'] += doc['score']
-			else :
-				list_doc[doc['url']] = doc
-	except :
-		continue
+def search_data(query):
+    results = []
 
+    base_path = os.path.join(os.path.dirname(__file__), '..', 'public', 'data')
+    # pdf_data = read_pdf(os.path.join(base_path, 'data.pdf'))
+    csv_data = read_csv(os.path.join(base_path, 'surah.csv'))
+    # json_data = read_json(os.path.join(base_path, 'data.json'))
 
-#convert to list
-list_data=[]
-for data in list_doc :
-	list_data.append(list_doc[data])
+    # all_data = pdf_data + csv_data + json_data
 
+    all_data = csv_data
 
-#sorting list descending
-count=1;
-for data in sorted(list_data, key=lambda k: k['score'], reverse=True):
-	y = json.dumps(data)
-	print(y)
-	if (count == n) :
-		break
-	count+=1
+    for item in all_data:
+        if query.lower() in item.lower():
+            results.append({
+                "title": item[:80],
+                "price": "$0.00",
+                "image": "media/cache/df/62/df6275ec7cb30dd60d2123a6f513ab65.jpg"
+            })
+            if len(results) >= 10:
+                break
+
+    return results
+
+if __name__ == "__main__":
+    if len(sys.argv) < 4:
+        print("Usage: python query.py indexdb <limit> <query>")
+        sys.exit(1)
+
+    query = sys.argv[3]
+    results = search_data(query)
+
+    for result in results:
+        print("▶" + json.dumps(result))
