@@ -48,6 +48,7 @@ class SearchController extends Controller
       if (empty($results) || !is_array($results)) {
         return [];
       }
+      
 
       // Process results based on type (optional)
       return $this->processResults($results, $type);
