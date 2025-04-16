@@ -8,7 +8,7 @@
             <div class="mr-8">
                 <a href="/" class="flex items-center">
                     <span
-                        class="text-2xl font-bold bg-gradient-to-r from-blue-600 via-red-500 to-yellow-400 bg-clip-text text-transparent">BookSearch</span>
+                        class="text-2xl font-bold bg-gradient-to-r from-blue-600 via-red-500 to-yellow-400 bg-clip-text text-transparent">NextBrave</span>
                 </a>
             </div>
 
@@ -17,8 +17,8 @@
                 <form action="{{ route('search') }}" method="GET" class="relative">
                     <div class="flex items-center w-full">
                         <div class="relative flex-grow">
-                            <input type="text" name="q" value="{{ $query }}"
-                                placeholder="Search for books..."
+                            <input type="text" name="query" value="{{ $query }}"
+                                placeholder="Search for quran..."
                                 class="w-full py-2.5 pl-4 pr-10 rounded-full border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm dark:bg-gray-800 dark:text-gray-100 transition-colors">
                             <!-- Clear button -->
                             @if ($query)
@@ -89,7 +89,7 @@
         <!-- Search Tabs -->
         <div
             class="flex items-center space-x-8 text-sm border-b border-gray-200 dark:border-gray-700 transition-colors">
-            <a href="{{ route('search', ['q' => $query, 'type' => 'all']) }}"
+            <a href="{{ route('search', ['query' => $query, 'type' => 'all']) }}"
                 class="flex items-center py-3 {{ request('type', 'all') === 'all' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100' }} transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -98,7 +98,7 @@
                 </svg>
                 All
             </a>
-            <a href="{{ route('search', ['q' => $query, 'type' => 'images']) }}"
+            <a href="{{ route('search', ['query' => $query, 'type' => 'images']) }}"
                 class="flex items-center py-3 {{ request('type') === 'images' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100' }} transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -107,7 +107,7 @@
                 </svg>
                 Images
             </a>
-            <a href="{{ route('search', ['q' => $query, 'type' => 'books']) }}"
+            <a href="{{ route('search', ['query' => $query, 'type' => 'books']) }}"
                 class="flex items-center py-3 {{ request('type') === 'books' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100' }} transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -116,7 +116,7 @@
                 </svg>
                 Books
             </a>
-            <a href="{{ route('search', ['q' => $query, 'type' => 'shopping']) }}"
+            <a href="{{ route('search', ['query' => $query, 'type' => 'shopping']) }}"
                 class="flex items-center py-3 {{ request('type') === 'shopping' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100' }} transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -125,7 +125,7 @@
                 </svg>
                 Shopping
             </a>
-            <a href="{{ route('search', ['q' => $query, 'type' => 'news']) }}"
+            <a href="{{ route('search', ['query' => $query, 'type' => 'news']) }}"
                 class="flex items-center py-3 {{ request('type') === 'news' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100' }} transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">

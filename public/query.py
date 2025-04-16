@@ -15,7 +15,7 @@ def read_pdf(file_path):
 def read_csv(file_path):
     try:
         df = pd.read_csv(file_path)
-        return df.astype(str).apply(lambda row: ' '.join(row), axis=1).tolist()
+        return df.astype(str).to_dict(orient='records')  # Mengembalikan list of dict
     except Exception as e:
         print(f"Failed to read CSV: {e}")
         return []
@@ -37,33 +37,57 @@ def search_data(query):
     results = []
 
     base_path = os.path.join(os.path.dirname(__file__), '..', 'public', 'data')
-    # pdf_data = read_pdf(os.path.join(base_path, 'data.pdf'))
-    csv_data = read_csv(os.path.join(base_path, 'surah.csv'))
-    # json_data = read_json(os.path.join(base_path, 'data.json'))
+    alquran_csv_data = read_csv(os.path.join(base_path, 'surah.csv'))
 
-    # all_data = pdf_data + csv_data + json_data
-
-    all_data = csv_data
-
-    for item in all_data:
-        if query.lower() in item.lower():
+    for item in alquran_csv_data:
+        # Gabungkan semua nilai item untuk pencarian
+        if any(query.lower() in str(value).lower() for value in item.values()):
             results.append({
-                "title": item[:80],
-                "price": "$0.00",
-                "image": "media/cache/df/62/df6275ec7cb30dd60d2123a6f513ab65.jpg"
+                "id": item.get("id"),
+                "surah_id": item.get("surah_id"),
+                "surah_arabic": item.get("surah_arabic"),
+                "surah_latin": item.get("surah_latin"),
+                "surah_transliteration": item.get("surah_transliteration"),
+                "surah_translation": item.get("surah_translation"),
+                "surah_num_ayah": item.get("surah_num_ayah"),
+                "surah_page": item.get("surah_page"),
+                "surah_location": item.get("surah_location"),
+                "ayah": item.get("ayah"),
+                "page": item.get("page"),
+                "quarter_hizb": item.get("quarter_hizb"),
+                "juz": item.get("juz"),
+                "manzil": item.get("manzil"),
+                "arabic": item.get("arabic"),
+                "latin": item.get("latin"),
+                "translation": item.get("translation"),
+                "no_footnote": item.get("no_footnote"),
+                "footnotes": item.get("footnotes"),
+                "tafsir_wajiz": item.get("tafsir_wajiz"),
+                "tafsir_tahlili": item.get("tafsir_tahlili"),
+                "tafsir_intro_surah": item.get("tafsir_intro_surah"),
+                "tafsir_outro_surah": item.get("tafsir_outro_surah"),
+                "tafsir_munasabah_prev_surah": item.get("tafsir_munasabah_prev_surah"),
+                "tafsir_munasabah_prev_theme": item.get("tafsir_munasabah_prev_theme"),
+                "tafsir_theme_group": item.get("tafsir_theme_group"),
+                "tafsir_kosakata": item.get("tafsir_kosakata"),
+                "tafsir_sabab_nuzul": item.get("tafsir_sabab_nuzul"),
+                "tafsir_conclusion": item.get("tafsir_conclusion"),
             })
-            if len(results) >= 10:
-                break
+
+            if len(results) > 100:
+              break
+
 
     return results
 
+
 if __name__ == "__main__":
-    if len(sys.argv) < 4:
-        print("Usage: python query.py indexdb <limit> <query>")
+    if len(sys.argv) < 2:
+        print("Usage: python query.py <query>")
         sys.exit(1)
 
-    query = sys.argv[3]
+    query = sys.argv[1]
     results = search_data(query)
 
     for result in results:
-        print("▶" + json.dumps(result))
+        print(json.dumps(result))
