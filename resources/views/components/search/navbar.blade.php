@@ -147,3 +147,15 @@
         </div>
     </div>
 </header>
+
+<script>
+    function clearSearch(form) {
+        form.query.value = '';
+        form.submit();
+    }
+
+    const toggleDarkMode = document.querySelector('#toggleDarkMode');
+    toggleDarkMode.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+    })
+</script>
