@@ -30,11 +30,11 @@ class SearchController extends Controller
     $allResults = cache()->remember($cacheKey, 60, function () use ($query, $type) {
       // Modify the Python command based on search type
       $pythonCommand = match ($type) {
-        'images' => "python query-2.py indexsurah 50 \"{$query}\"",
-        'books' => "python query-2.py indexsurah 50 \"{$query}\"",
-        'shopping' => "python query-2.py indexsurah 12 \"{$query}\"",
-        'news' => "python query-2.py indexsurah 10 \"{$query}\"",
-        default => "python query-2.py indexsurah 30 \"{$query}\""
+        'images' => "python query.py indexsurah 50 \"{$query}\"",
+        'books' => "python query.py indexsurah 50 \"{$query}\"",
+        'shopping' => "python query.py indexsurah 12 \"{$query}\"",
+        'news' => "python query.py indexsurah 10 \"{$query}\"",
+        default => "python query.py indexsurah 50 \"{$query}\""
       };
 
       $output = shell_exec($pythonCommand);
@@ -48,7 +48,7 @@ class SearchController extends Controller
       if (empty($results) || !is_array($results)) {
         return [];
       }
-      
+
 
       // Process results based on type (optional)
       return $this->processResults($results, $type);
